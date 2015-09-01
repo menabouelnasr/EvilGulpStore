@@ -24,13 +24,16 @@
 Been with us before? Login below! <br>
 <form action= "Login.jsp">
 <input type=submit name=guest value="Login"> </input>
+<% session.setAttribute("Guest",0); %>
 </form><br>
 Not a user? Sign up below! <br>
 <form action= "SignUp.jsp">
 <input type=submit name=guest value="Sign Up"> </input>
+<% session.setAttribute("Guest",0); %>
 </form><br>
-Otherwise, you may checkout as a guest.<br>
-<form action= "CheckoutPage.jsp" method="post">
+You must be a member to checkout, however, you can feel free to browse our <br>
+products if you do not want to register today.<br>
+<form action= "ProductList" method="get">
 <input type=submit name=guest value="Continue as Guest"> </input>
 <% session.setAttribute("Guest",1); %>
 </form>

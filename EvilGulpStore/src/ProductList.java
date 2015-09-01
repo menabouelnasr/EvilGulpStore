@@ -134,15 +134,6 @@ public class ProductList extends HttpServlet {
 		double price;
 		int qty;
 		HttpSession session = request.getSession();
-		System.out.println("Guest " +session.getAttribute("Guest"));
-		if((int)session.getAttribute("Guest")==1)
-		{
-			model.Shoppingcart cart = new Shoppingcart();
-			delete(cart);
-			doGet(request,response);
-		}
-		else
-		{
 			
 			UserID= (long) session.getAttribute("UserID");
 			List<Shoppingcart> a = getCart();
@@ -172,7 +163,6 @@ public class ProductList extends HttpServlet {
 			delete(cart);
 			doGet(request,response);
 			}
-		}
 	}
 	
 	
