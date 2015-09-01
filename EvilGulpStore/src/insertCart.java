@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,8 +70,48 @@ public class insertCart extends HttpServlet {
     	return blogs;
     	
     }
+    
+    public List<Shoppingcart> getCart()
+    {
+    	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    	String qString = "SELECT s FROM Shoppingcart s";
+    	TypedQuery<Shoppingcart> q = em.createQuery(qString, Shoppingcart.class);
+    	
+    	List<Shoppingcart> cart;
+    	try{ cart= q.getResultList();
+    	if(cart == null || cart.isEmpty())
+    		cart= null;
+    	}
+    	finally
+    	{
+    		em.close();
+    	}
+    	return cart;
+    	
+    }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String productID;
+		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="";
+		double price = 0, total = 0, finalTotal=0;
+		int qty, itemQ;
+		DecimalFormat myFormatter = new DecimalFormat("###,###.##");
+		
+		output+="<table class= \"table table-striped\">";
+        output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Quantity</th><th style=\"text-align:center;\"> Total Price</th></tr> "; 
+
+		List<Shoppingcart> newCart = getCart();
+		for(Shoppingcart b : newCart)
+		{
+			total= b.getPrice()*b.getQuantity();
+			output+= "<tr><td>"+ b.getProductname()+"</td><td>" +b.getDescription()+"</td><td>"+ b.getColor() +"</td><td>"+ b.getQuantity() +"</td><td>$"+total+"</td></tr>";
+			finalTotal+=total;
+		}
+		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Grand Total</th></tr> "; 
+		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+myFormatter.format(finalTotal)+"</td></tr>";
+		request.setAttribute("message", output);
+	    getServletContext().getRequestDispatcher("/Confirmation.jsp").forward(request,response);
+	    output="";
+		
 	}
 
 	/**
@@ -77,9 +119,11 @@ public class insertCart extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productID;
-		String quantity, color="", desc="", name="";
-		double price = 0;
-		int qty;
+		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="";
+		double price = 0, total = 0, finalTotal=0;
+		int qty, itemQ;
+		DecimalFormat myFormatter = new DecimalFormat("###,###.##");
+		
 		quantity= request.getParameter("quantity");
 		qty= Integer.parseInt(quantity);
 		
@@ -110,9 +154,23 @@ public class insertCart extends HttpServlet {
 		} catch (Exception e){
 			System.out.println(e);
 		} finally {
-			em.close();
-			System.out.println("cerrado!");
 		}
+		output+="<table class= \"table table-striped\">";
+        output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Quantity</th><th style=\"text-align:center;\"> Total Price</th></tr> "; 
+
+		List<Shoppingcart> newCart = getCart();
+		for(Shoppingcart b : newCart)
+		{
+			total= b.getPrice()*b.getQuantity();
+			output+= "<tr><td>"+ b.getProductname()+"</td><td>" +b.getDescription()+"</td><td>"+ b.getColor() +"</td><td>"+ b.getQuantity() +"</td><td>$"+total+"</td></tr>";
+			finalTotal+=total;
+		}
+		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Grand Total</th></tr> "; 
+		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+myFormatter.format(finalTotal)+"</td></tr>";
+		request.setAttribute("message", output);
+	    getServletContext().getRequestDispatcher("/ShoppingCartJSP.jsp").forward(request,response);
+	    output="";
+		
 	}
 
 }

@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -32,6 +33,7 @@ public class GetStore extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
     public List<Product> getProducts()
     {
     	EntityManager em = DBUtil.getEmFactory().createEntityManager();
