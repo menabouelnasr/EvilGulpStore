@@ -110,8 +110,8 @@ public class insertCart extends HttpServlet {
 		HttpSession session = request.getSession();
 		String productID;
 		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="", output2="";
-		double price = 0, total = 0, finalTotal=0;
-		int qty, itemQ;
+		double price = 0, total = 0, finalTotal=0, taxed=0;
+		int qty, itemQ, No=0;
 		long UserID= (long) session.getAttribute("UserID");
 		DecimalFormat myFormatter = new DecimalFormat("###,###.##");
 		
@@ -126,8 +126,11 @@ public class insertCart extends HttpServlet {
 			output+= "<tr><td>"+ b.getProductname()+"</td><td>" +b.getDescription()+"</td><td>"+ b.getColor() +"</td><td>"+ b.getQuantity() +"</td><td>$"+total+"</td></tr>";
 			finalTotal+=total;
 		}
+		taxed=finalTotal*0.06;
+		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Total + Tax (6%)</th></tr> "; 
+		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+ myFormatter.format(finalTotal)+ " + $"+ myFormatter.format(taxed)+"</td></tr>";
 		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Grand Total</th></tr> "; 
-		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+myFormatter.format(finalTotal)+"</td></tr>";
+		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+ myFormatter.format(finalTotal*1.06)+"</td></tr>";
 		
 		
 	    output2+="<table class= \"table table-striped\">";
@@ -143,10 +146,15 @@ public class insertCart extends HttpServlet {
 				output2+= "<tr><td style=\"text-align:left;\">"+ b.getProductname()+"</td><td style=\"text-align:left;\">" + b.getQuantity() +"</td><td style=\"text-align:left;\">$"+total+"</td><td>"+ "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 				finalTotal+=total;
 			}
+			No=1;
 		}
-		output2+="<tr><th style=\"text-align:left;\"></th><th style=\"text-align:left;\"> </th><th style=\"text-align:left;\">Grand Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr> "; 
-		output2+= "<tr><td>"+ " "+ "</td><td>"+ " "+ "</td><td style=\"text-align:left;\">$"+myFormatter.format(finalTotal)+"</td></tr>";
-		
+		if(No!=1)
+		{
+			output2+="<tr><th style=\"text-align:left;\"></th><th style=\"text-align:left;\"> </th><th style=\"text-align:left;\">Total + Tax (6%)</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr> "; 
+			output2+= "<tr><td>"+ " "+ "</td><td>"+ " "+ "</td><td style=\"text-align:left;\">$"+ myFormatter.format(finalTotal) + " + $"+ myFormatter.format(taxed)+"</td></tr>";
+			output2+="<tr><th style=\"text-align:left;\"></th><th style=\"text-align:left;\"> </th><th style=\"text-align:left;\">Grand Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr> "; 
+			output2+= "<tr><td>"+ " "+ "</td><td>"+ " "+ "</td><td style=\"text-align:left;\">$"+ myFormatter.format((finalTotal*1.06))+"</td></tr>";
+		}
 		request.setAttribute("message", output);
 		request.setAttribute("message2", output2);
 	    

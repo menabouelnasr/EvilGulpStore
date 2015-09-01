@@ -75,6 +75,7 @@ public class CustSignUp extends HttpServlet {
 		lName=request.getParameter("lName");
 		email=request.getParameter("email");
 		pwd= request.getParameter("password");
+		long ID=0;
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		try 
 		{
@@ -89,6 +90,13 @@ public class CustSignUp extends HttpServlet {
 		} finally {
 		}
 		
+		String qString = "Select max(s.id) from Shopper s";
+    	TypedQuery<Long> q = em.createQuery(qString, Long.class);
+    	ID= q.getSingleResult();
+    	System.out.println(ID);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("UserID", ID);
 		getServletContext().getRequestDispatcher("/CheckoutPage.jsp").forward(request,response);
 	}
 	

@@ -4,9 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style> 
+  body {background-color: white;  text-align: center; }
+   p {background-color: white;}
+   h1{text:white; text-align-center;}
+   </style>
+<title>Sign Up</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+<div class="jumbotron"> 
+  <h1>Sign Up</h1>
+</div>
+</nav>
+<body></body>
 <form action= "CustSignUp" method="get">
 First Name:
 <input type="text"  style="width:200px; height:25px;" name="fName"><br><br>
