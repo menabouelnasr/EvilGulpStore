@@ -24,10 +24,10 @@
 ${message}
 </body>
 <body>
-<form action= "ProductList" method="post">
+<form action= "ProductList" method="get">
 <input type=submit name=guest value="Continue Shopping"> </input>
 </form>
-<form action= "CheckoutPage.jsp">
+<form action= "FirstPage.jsp">
 <input type=submit name=guest value="Checkout"> </input>
 </form>
 <br>

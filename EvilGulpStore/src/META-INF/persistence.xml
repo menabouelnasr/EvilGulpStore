@@ -4,6 +4,8 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>model.Product</class>
 		<class>model.Shoppingcart</class>
+		<class>model.Shopper</class>
+		<class>model.Shophistory</class>
 		<properties>
 			<property name="eclipselink.exclude-eclipselink-orm" value="false"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>

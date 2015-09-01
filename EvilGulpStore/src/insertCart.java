@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Product;
+import model.Shophistory;
 import model.Shoppingcart;
 import customTools.DBUtil;
 
@@ -87,17 +88,36 @@ public class insertCart extends HttpServlet {
     		em.close();
     	}
     	return cart;
+    }
+    public List<Shophistory> getHistory()
+    {
+    	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    	String qString = "SELECT s FROM Shophistory s";
+    	TypedQuery<Shophistory> q = em.createQuery(qString, Shophistory.class);
     	
+    	List<Shophistory> history;
+    	try{ history= q.getResultList();
+    	if(history == null || history.isEmpty())
+    		history= null;
+    	}
+    	finally
+    	{
+    		em.close();
+    	}
+    	return history;
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String productID;
-		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="";
+		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="", output2="";
 		double price = 0, total = 0, finalTotal=0;
 		int qty, itemQ;
+		long UserID= (long) session.getAttribute("UserID");
 		DecimalFormat myFormatter = new DecimalFormat("###,###.##");
 		
+		
 		output+="<table class= \"table table-striped\">";
-        output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Quantity</th><th style=\"text-align:center;\"> Total Price</th></tr> "; 
+        output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Quantity</th><th style=\"text-align:center;\"> Total Price</th><th>     </th></tr> "; 
 
 		List<Shoppingcart> newCart = getCart();
 		for(Shoppingcart b : newCart)
@@ -108,10 +128,31 @@ public class insertCart extends HttpServlet {
 		}
 		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Grand Total</th></tr> "; 
 		output+= "<tr><td>"+ "" +"</td><td>" + " "+"</td><td>"+ " " +"</td><td>"+ " " +"</td><td>$"+myFormatter.format(finalTotal)+"</td></tr>";
-		request.setAttribute("message", output);
-	    getServletContext().getRequestDispatcher("/Confirmation.jsp").forward(request,response);
-	    output="";
 		
+		
+	    output2+="<table class= \"table table-striped\">";
+	    output2+="<tr><th style=\"text-align:right;\">Previous History</th><th style=\"text-align:right;\">    </th><th style=\"text-align:right;\">   </th><th style=\"text-align:right;\">  </th><th style=\"text-align:right;\">   </th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></th><th style=\"text-align:right;\"></tr>";
+        output2+="<tr><th style=\"text-align:left;\">Product Name</th><th style=\"text-align:left;\">Quantity</th><th style=\"text-align:left;\">Total Price</th><th>    </th>    <th></th>    <th>    </th></tr> "; 
+        List<Shophistory> history = getHistory();
+      
+		for(Shophistory b : history)
+		{
+			if(((long)b.getUserid())==UserID)
+			{
+				total= b.getPrice()*b.getQuantity();
+				output2+= "<tr><td style=\"text-align:left;\">"+ b.getProductname()+"</td><td style=\"text-align:left;\">" + b.getQuantity() +"</td><td style=\"text-align:left;\">$"+total+"</td><td>"+ "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+				finalTotal+=total;
+			}
+		}
+		output2+="<tr><th style=\"text-align:left;\"></th><th style=\"text-align:left;\"> </th><th style=\"text-align:left;\">Grand Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr> "; 
+		output2+= "<tr><td>"+ " "+ "</td><td>"+ " "+ "</td><td style=\"text-align:left;\">$"+myFormatter.format(finalTotal)+"</td></tr>";
+		
+		request.setAttribute("message", output);
+		request.setAttribute("message2", output2);
+	    
+		getServletContext().getRequestDispatcher("/Confirmation.jsp").forward(request,response);
+		output="";
+		output2="";
 	}
 
 	/**

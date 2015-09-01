@@ -13,28 +13,28 @@
    p {background-color: white;}
    h1{text:white; text-align-center;}
    </style>
-<title>PaymentInformation</title>
+<title>Welcome</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
-  <h1>Order Confirmation</h1>
-<form action= "ProductList" method="post">
+  <h1>Log in or Sign up!</h1>
+</div>
 </nav>
-<input type=submit name=guest value="End Session"> </input>
+Been with us before? Login below! <br>
+<form action= "Login.jsp">
+<input type=submit name=guest value="Login"> </input>
+</form><br>
+Not a user? Sign up below! <br>
+<form action= "SignUp.jsp">
+<input type=submit name=guest value="Sign Up"> </input>
+</form><br>
+Otherwise, you may checkout as a guest.<br>
+<form action= "CheckoutPage.jsp" method="post">
+<input type=submit name=guest value="Continue as Guest"> </input>
+<% session.setAttribute("Guest",1); %>
 </form>
-</div>
 <br>
 <br>
-<div style="text-align: center">
-<form>
-Your order confirmation number is:  <%= (int) (Math.random() * 1000000) %>
-${message}
-</form>
-</div>
-<p></p>
-
-${message2}
-<% %>
-
 </body>
+</html>

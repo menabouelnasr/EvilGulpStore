@@ -9,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <style> 
-  body {text: white; background-color: white;  text-align: center; }
+  body {background-color: white;  text-align: center; }
    p {background-color: white;}
    h1{text:white; text-align-center;}
    </style>
@@ -18,23 +18,18 @@
 <body>
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
-  <h1>Order Confirmation</h1>
-<form action= "ProductList" method="post">
+  <h1>Log In</h1>
+</div>
 </nav>
-<input type=submit name=guest value="End Session"> </input>
-</form>
-</div>
-<br>
-<br>
-<div style="text-align: center">
-<form>
-Your order confirmation number is:  <%= (int) (Math.random() * 1000000) %>
-${message}
-</form>
-</div>
-<p></p>
-
-${message2}
-<% %>
-
 </body>
+<body>
+<form action= "CustSignUp" method="post">
+${message}
+<br>
+<br>
+<input type="text"  style="width:200px; height:25px;" placeholder= "email@domain.com" name="email"><br><br>
+<input type="password" style="width:200px; height:25px;" placeholder= "password" name="password"><br><br>
+<input type=submit name=guest value="Login"> </input>
+</form>
+</body>
+</html>
