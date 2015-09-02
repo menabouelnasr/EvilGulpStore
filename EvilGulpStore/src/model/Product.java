@@ -21,6 +21,8 @@ public class Product implements Serializable {
 
 	private String description;
 
+	private String picture;
+
 	private double price;
 
 	private String productname;
@@ -50,6 +52,14 @@ public class Product implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public double getPrice() {

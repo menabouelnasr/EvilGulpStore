@@ -54,7 +54,7 @@ public class GetStore extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int prodID;
-		String tempstr, output= "";
+		String tempstr, output= "", output2="";
 		
 		tempstr=request.getParameter("prodID");
 		prodID= Integer.parseInt(tempstr);
@@ -71,13 +71,13 @@ public class GetStore extends HttpServlet {
 		{
 			if(b.getId()==prodID)
 			{
-				output+= "<tr><td>"+ b.getProductname()+"</td><td>" + b.getDescription()+"</td><td>" +b.getColor()+ "</td><td>" + b.getPrice()+ "</td></tr>";
+				output+= "<tr><td>"+ b.getProductname()+"</td><td>" + b.getDescription()+"</td><td>" +b.getColor()+ "</td><td>" + b.getPrice()+ "</td></tr></table>";
+				output+= "<table> <img src='" + b.getPicture() + "' width ='200' height='200' style=align:center>";
 			}
 		}
         
 		session.setAttribute("List", false);
 	   request.setAttribute("message", output);
-    
 	   getServletContext().getRequestDispatcher("/StoreDisplay.jsp").forward(request,response);
 	   output="";
 	}

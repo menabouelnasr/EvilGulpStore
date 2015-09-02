@@ -27,13 +27,16 @@
 </div> 
 </nav>
 <% if ((Boolean)session.getAttribute("List")==false) {%>
+
 ${message}
+<br>
+<br>
 <form action="GetStore" method= "Post">
 <input  type=submit name=guest value="Purchase"> </input>
 </form> 
 <form action="ProductList" method= "Get">
 <input  type=submit name=guest value="Back"> </input>
-</form> 
+</form>
 
 <% }; %>
 <% if ((Boolean)session.getAttribute("List")==true) {%>
