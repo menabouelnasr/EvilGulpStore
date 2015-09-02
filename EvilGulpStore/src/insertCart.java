@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Payment;
 import model.Product;
 import model.Shophistory;
 import model.Shoppingcart;
@@ -45,6 +46,21 @@ public class insertCart extends HttpServlet {
     	trans.begin(); 
     	try {
     	em.persist(cart);
+    	trans.commit();
+    	} catch (Exception e) {
+    	System.out.println(e);
+    	trans.rollback();
+    	} finally {
+    	em.close();
+    	}
+    }
+    public static void insert(Payment pay) 
+    {
+    	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    	EntityTransaction trans = em.getTransaction();
+    	trans.begin(); 
+    	try {
+    	em.persist(pay);
     	trans.commit();
     	} catch (Exception e) {
     	System.out.println(e);
@@ -109,13 +125,36 @@ public class insertCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String productID;
-		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="", output2="";
+		String quantity, color="", desc="", name="", itemC, itemD, itemN, output="", output2="", bAddress, bCity, bState, sAddress, sCity, sState, card, bZip, sZip;
 		double price = 0, total = 0, finalTotal=0, taxed=0;
 		int qty, itemQ, No=0;
 		long UserID= (long) session.getAttribute("UserID");
 		DecimalFormat myFormatter = new DecimalFormat("###,###.##");
 		
+		bAddress= request.getParameter("address");
+		bCity= request.getParameter("city");
+		bState=request.getParameter("state");
+		bZip= request.getParameter("zip");
+		sAddress= request.getParameter("address2");
+		sCity= request.getParameter("city2");
+		sState= request.getParameter("state2");
+		sZip=request.getParameter("zip2");
+		card= request.getParameter("cardNum");
 		
+		
+		model.Payment pay= new Payment();
+		pay.setBaddress(bAddress);
+		pay.setBcity(bCity);
+		pay.setBstate(bState);
+		pay.setBzip(bZip);
+		pay.setCard(card);
+		pay.setSaddress(sAddress);
+		pay.setScity(sCity);
+		pay.setSstate(sState);
+		pay.setSzip(sZip);
+		pay.setUserid((int) UserID);
+		insert(pay);
+
 		output+="<table class= \"table table-striped\">";
         output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Quantity</th><th style=\"text-align:center;\"> Total Price</th><th>     </th></tr> "; 
 

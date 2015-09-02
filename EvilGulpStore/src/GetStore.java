@@ -62,7 +62,7 @@ public class GetStore extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("prodID", tempstr);
 		
-		System.out.println("Set session variable " + prodID);
+		//System.out.println("Set session variable " + prodID);
 		output+="<table class= \"table table-striped\">";
         output+="<tr><th style=\"text-align:center;\">Product Name</th><th style=\"text-align:center;\">Description</th><th style=\"text-align:center;\"> Product Color </th><th style=\"text-align:center;\"> Product Price</th></tr> "; 
 

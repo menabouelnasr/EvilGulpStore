@@ -93,7 +93,7 @@ public class CustSignUp extends HttpServlet {
 		String qString = "Select max(s.id) from Shopper s";
     	TypedQuery<Long> q = em.createQuery(qString, Long.class);
     	ID= q.getSingleResult();
-    	System.out.println(ID);
+    	//System.out.println(ID);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("UserID", ID);
@@ -110,7 +110,7 @@ public class CustSignUp extends HttpServlet {
 		long ID = 0;
 		int x=0;
 		email=request.getParameter("email");
-		System.out.println(email);
+		//System.out.println(email);
 		pwd= request.getParameter("password");
 		List<Shopper> a = getShoppers();
 		
@@ -130,7 +130,7 @@ public class CustSignUp extends HttpServlet {
 				}
 			}
 		}
-		System.out.println(x);
+		//System.out.println(x);
 		if(x==1)
 		{
 			HttpSession session = request.getSession();
