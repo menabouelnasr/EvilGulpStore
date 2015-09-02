@@ -114,10 +114,15 @@ public class CustSignUp extends HttpServlet {
 		List<Shopper> a = getShoppers();
 		for(Shopper b : a)
 		{
-			if(b.getEmail().equalsIgnoreCase(email)&& b.getPassword().equalsIgnoreCase(pwd))
+			if(b.getEmail().equalsIgnoreCase("admin@domain.com")&& b.getPassword().equalsIgnoreCase("admin"))
+			{
+				x=2;
+				ID=b.getId();
+				break;
+			}
+			else if(b.getEmail().equalsIgnoreCase(email)&& b.getPassword().equalsIgnoreCase(pwd))
 			{
 				x=1;
-				ID=b.getId();
 				break;
 			}
 		}
@@ -126,6 +131,10 @@ public class CustSignUp extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("UserID", ID);
 			getServletContext().getRequestDispatcher("/CheckoutPage.jsp").forward(request,response);
+		}
+		else if(x==2)
+		{
+			getServletContext().getRequestDispatcher("/Admin").forward(request,response);
 		}
 		else
 		{

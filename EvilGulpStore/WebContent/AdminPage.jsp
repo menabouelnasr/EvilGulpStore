@@ -13,33 +13,20 @@
    p {background-color: white;}
    h1{text:white; text-align-center;}
    </style>
-<title>Welcome to the Tennis Store</title>
+<title>Admin page</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
-  <h1>Tennis Gear & Equipment</h1>
-</div>
-<form action="Login.jsp">
-<input  type=submit name=guest value="Admin Login"> </input>
-</form> 
+  <h1>Total Purchase Order History</h1>
+<form action= "ProductList" method="get">
 </nav>
-<% if ((Boolean)session.getAttribute("List")==false) {%>
-${message}
-<form action="GetStore" method= "Post">
-<input  type=submit name=guest value="Purchase"> </input>
-</form> 
-<form action="ProductList" method= "Post">
-<input  type=submit name=guest value="Back"> </input>
-</form> 
-
-<% }; %>
-<% if ((Boolean)session.getAttribute("List")==true) {%>
-${message}
-<% }; %>
-
-
+<input type=submit name=submit value="Back to Store"> </input>
+</form>
+</div>
 <br>
 <br>
+${message}
+</form>
+
 </body>
-</html>
