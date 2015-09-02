@@ -15,7 +15,7 @@
    </style>
 <title>Sign Up</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>Sign Up</h1>

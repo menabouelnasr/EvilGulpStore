@@ -15,7 +15,7 @@
    </style>
 <title>Admin page</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>Total Purchase Order History</h1>

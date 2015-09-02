@@ -15,7 +15,7 @@
    </style>
 <title>Shopping Cart</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>Your Shopping Cart</h1>

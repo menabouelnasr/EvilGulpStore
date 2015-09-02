@@ -9,15 +9,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <style> 
-  body {text: white; background-color: white;  text-align: center; }
+  body {text: red;  text-align: center; }
    p {background-color: white;}
    h1{text:white; text-align-center;}
    </style>
 <title>Welcome to the Tennis Store</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
-<div  align= "right">
+<div  align= "right-center">
 <form action="Login.jsp">
 <input  type=submit name=guest value="Admin Login"> </input>
 </form>
@@ -31,7 +31,7 @@ ${message}
 <form action="GetStore" method= "Post">
 <input  type=submit name=guest value="Purchase"> </input>
 </form> 
-<form action="ProductList" method= "Post">
+<form action="ProductList" method= "Get">
 <input  type=submit name=guest value="Back"> </input>
 </form> 
 
@@ -39,7 +39,6 @@ ${message}
 <% if ((Boolean)session.getAttribute("List")==true) {%>
 ${message}
 <% }; %>
-
 
 <br>
 <br>

@@ -15,7 +15,7 @@
    </style>
 <title>Welcome to the Tennis Store</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>Purchase Order</h1>

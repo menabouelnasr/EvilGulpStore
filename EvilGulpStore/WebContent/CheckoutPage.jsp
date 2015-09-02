@@ -22,7 +22,7 @@
 </div>
 </nav>
 </body>
-<body>
+<body background="Images\Tennis.jpg">
 <form action= "insertCart" method="get">
 First Name on Card:
 <input type="text"  style="width:200px; height:25px;" name="fName"><br><br>

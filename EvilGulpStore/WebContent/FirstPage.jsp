@@ -15,7 +15,7 @@
    </style>
 <title>Welcome</title>
 </head>
-<body>
+<body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
 <div class="jumbotron"> 
   <h1>Log in or Sign up!</h1>
