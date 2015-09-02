@@ -31,7 +31,7 @@ Last Name on Card:
 Credit Card Number:
 <input type="number"  style="width:200px; height:25px;" placeholder= "ex: 1234 5679 1011 1213" name="cardNum"><br><br>
 3 Digit Security Code:
-<input type="number" style="width:200px; height:25px;" placeholder= "located on the back" name="secCode"><br><br>
+<input type="number" style="width:200px; height:25px;" placeholder= "ex: 123" name="secCode"><br><br>
 Expiration Date:
 <input type="number" style="width:200px; height:25px;" placeholder= "ex. MM/YY" name="exp"><br><br>
 Address:<br>
