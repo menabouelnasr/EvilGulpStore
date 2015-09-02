@@ -110,22 +110,27 @@ public class CustSignUp extends HttpServlet {
 		long ID = 0;
 		int x=0;
 		email=request.getParameter("email");
+		System.out.println(email);
 		pwd= request.getParameter("password");
 		List<Shopper> a = getShoppers();
-		for(Shopper b : a)
+		
+		if(email.equalsIgnoreCase("admin@domain.com")&& pwd.equalsIgnoreCase("admin"))
 		{
-			if(b.getEmail().equalsIgnoreCase("admin@domain.com")&& b.getPassword().equalsIgnoreCase("admin"))
+			x=2;
+		}
+		else
+		{
+			for(Shopper b : a)
 			{
-				x=2;
-				ID=b.getId();
-				break;
-			}
-			else if(b.getEmail().equalsIgnoreCase(email)&& b.getPassword().equalsIgnoreCase(pwd))
-			{
-				x=1;
-				break;
+				if(b.getEmail().equalsIgnoreCase(email)&& b.getPassword().equalsIgnoreCase(pwd))
+				{
+					x=1;
+					ID=b.getId();
+					break;
+				}
 			}
 		}
+		System.out.println(x);
 		if(x==1)
 		{
 			HttpSession session = request.getSession();

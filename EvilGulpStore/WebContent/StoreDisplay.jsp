@@ -17,12 +17,14 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-<div class="jumbotron"> 
-  <h1>Tennis Gear & Equipment</h1>
-</div>
+<div  align= "right">
 <form action="Login.jsp">
 <input  type=submit name=guest value="Admin Login"> </input>
-</form> 
+</form>
+</div>
+<div class="jumbotron"> 
+  <h1>Tennis Gear & Equipment</h1>
+</div> 
 </nav>
 <% if ((Boolean)session.getAttribute("List")==false) {%>
 ${message}
