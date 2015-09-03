@@ -250,7 +250,7 @@ public class insertCart extends HttpServlet {
 		for(Shoppingcart b : newCart)
 		{
 			total= b.getPrice()*b.getQuantity();
-			output+= "<tr><td>"+ b.getProductname()+"</td><td>" +b.getDescription()+"</td><td>"+ b.getColor() +"</td><td>"+ b.getQuantity() +"</td><td>$"+total+"</td></tr>";
+			output+= "<tr><td>"+ b.getProductname()+"</td><td>" +b.getDescription()+"</td><td>"+ b.getColor() +"</td><td>"+ b.getQuantity() +"</td><td>$"+total+"<td><a href= RemoveItem?prodID="+ b.getId()+">"+ "Remove Item"+"</td></tr>";
 			finalTotal+=total;
 		}
 		output+="<tr><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"></th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> </th><th style=\"text-align:center;\"> Grand Total</th></tr> "; 

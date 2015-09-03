@@ -8,46 +8,34 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <style>
+    <style>
 a:link {    /* unvisited link */color: black; text-decoration: none}
 a:visited {    /* visited link */color: black;}
 a:hover {    /* mouse over link */color: red; text-decoration: underline;}
 a:active {    /* active link */color: black;}
 </style>
   <style> 
-  body {text: red;  text-align: center; }
+  body {text: white; background-color: white;  text-align: center; }
    p {background-color: white;}
    h1{text:white; text-align-center;}
    </style>
-<title>Welcome to the Tennis Store</title>
+<title>Shopping Cart</title>
 </head>
 <body background="Images\Tennis.jpg">
 <nav class="navbar navbar-inverse">
-<div  align= "right-center">
-<form action="Login.jsp">
-<input  type=submit name=guest value="Admin Login"> </input>
-</form>
-</div>
 <div class="jumbotron"> 
-  <h1>Tennis Gear & Equipment</h1>
-</div> 
+  <h1>Your Shopping Cart</h1>
+</div>
 </nav>
-<% if ((Boolean)session.getAttribute("List")==false) {%>
-
 ${message}
-<br>
-<form action="GetStore" method= "Post">
-<input  type=submit name=guest value="Purchase"> </input>
-</form> 
-<form action="ProductList" method= "Get">
-<input  type=submit name=guest value="Back"> </input>
+</body>
+<body>
+<form action= "ProductList" method="get">
+<input type=submit name=guest value="Continue Shopping"> </input>
 </form>
-
-<% }; %>
-<% if ((Boolean)session.getAttribute("List")==true) {%>
-${message}
-<% }; %>
-
+<form action= "CheckoutPage.jsp">
+<input type=submit name=guest value="Checkout"> </input>
+</form>
 <br>
 <br>
 </body>
